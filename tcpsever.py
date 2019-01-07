@@ -3,7 +3,7 @@
 import socket
 import threading
 
-bip = "127.0.0.1"
+bip = "0.0.0.0"
 bport = 9999
 
 server = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -18,10 +18,13 @@ def handle_client(client_socket):
     req = client_socket.recv(1024)
 
     print(f"res{req}")
+    
+    user = input(">>")
 
-    client_socket.send(b"ACK!")
+    user = user.encode("utf-8")
 
-    client_socket.close()
+    client_socket.send(user)
+
 
 while True:
     client,addr = server.accept()
