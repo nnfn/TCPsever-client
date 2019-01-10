@@ -17,13 +17,11 @@ print(f"Listening on {bip},{bport}")
 def handle_client(client_socket):
     req = client_socket.recv(1024)
 
-    print(f"res{req}")
+    print(req.decode("utf-8"))
     
     user = input(">>")
 
-    user = user.encode("utf-8")
-
-    client_socket.send(user)
+    client_socket.send(user.encode("utf-8"))
 
 
 while True:
