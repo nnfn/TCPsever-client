@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-
 import socket
-import threading
 
 bip = "0.0.0.0"
 bport = 9999
@@ -10,23 +8,23 @@ server = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 
 server.bind((bip,bport))
 
-server.listen(5)
+server.listen(1)
 
 print(f"Listening on {bip},{bport}")
 
-def handle_client(client_socket):
-    req = client_socket.recv(1024)
+def handle_client():
+    while True:
+        conn, addr = server.accept()
+        req = conn.recv(1024)
+        if not req:
+            conn.shutdown(1)
+            break
+        print(req.decode("utf-8"))
+        user = input(">> ")
+        if user == "exit":
+            conn.shutdown(1)
+            break
+        conn.send(user.encode("utf-8"))
 
-    print(req.decode("utf-8"))
-    
-    user = input(">> ")
-
-    client_socket.send(user.encode("utf-8"))
-    
-
-
-while True:
-    client,addr = server.accept()
-    print(client)
-    client_hand = threading.Thread(target=handle_client,args=(client,))
-    client_hand.start()
+if __name__ == '__main__':
+    handle_client()
