@@ -22,6 +22,8 @@ def handle_client(client_socket):
     user = input(">>")
 
     client_socket.send(user.encode("utf-8"))
+    
+    client_socket.close()
 
 
 while True:
