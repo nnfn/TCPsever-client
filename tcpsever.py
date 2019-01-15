@@ -18,10 +18,8 @@ def handle_client(client_socket):
     req = client_socket.recv(1024)
 
     print(req.decode("utf-8"))
-    
-    user = input(">>")
 
-    client_socket.send(user.encode("utf-8"))
+    client_socket.send(b"ACK".encode("utf-8"))
     
     client_socket.close()
 
