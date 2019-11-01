@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 import socket
 
-user = input("サーバー側のIPを入力>> ")
 
-thost = user
-tport =  9999
+thost = "127.0.0.1"
+tport =  1234
 
 while True:
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -15,5 +14,5 @@ while True:
         break
     client.send(msg.encode("utf-8"))
     res = client.recv(1024)
-    print(res.decode("utf-8"))
+    print(res.decode("utf-8")) # てす
 

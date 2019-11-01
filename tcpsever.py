@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import socket
 
-bip = "0.0.0.0"
+bip = "127.0.0.1"
 bport = 9999
 
 server = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
